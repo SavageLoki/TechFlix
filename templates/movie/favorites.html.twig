@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movies
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="d-flex flex-wrap justify-content-center">
+			{% for favorite in favorites %}
+				<div class="card bg-secondary text-white m-3" style="width: 18rem;">
+					{% if favorite.primaryImage != NULL %}
+						<img src="{{ favorite.primaryImage.url }}" class="card-img-top w-100 h-50" alt="...">
+					{% else %}
+						<img src="{{ asset('img/no_image.png') }}" class="card-img-top" alt="...">
+					{% endif %}
+					<div class="card-body text-center">
+						<h5 class="card-title">{{ favorite.titleText.text }}</h5>
+						<p class="card-text text-light">{{favorite.releaseYear.year}}</p>
+						<p class="card-text text-secondary">{{favorite.titleType.text}}</p>
+						<a href="{{ path('movie_view', {id: favorite.id}) }}" class="btn btn-primary">Show Details</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		{% if favorites != NULL %}
+			<div class="pagination d-flex justify-content-center ">
+				<h3>{{ knp_pagination_render(favorites) }}</h3>
+			</div>
+		{% endif %}
+
+	{% endblock %}

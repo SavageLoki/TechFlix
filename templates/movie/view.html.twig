@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ movie.titleText.text }}
+{% endblock %}
+
+{% block body %}
+	<div class="container bg-dark text-white p-3 mt-5">
+		<div class="row g-0 mt-3">
+			<div class="col-md-4">
+				{% if movie.primaryImage != NULL %}
+					<img src="{{ movie.primaryImage.url }}" class="" alt="Movie's image">
+				{% else %}
+					<img src="{{ asset('img/no_image.png') }}" class="" alt="No image">
+				{% endif %}
+			</div>
+			<div class="col-md-8 text-center">
+				<h1 class="">{{ movie.titleText.text }}
+					-
+					{{movie.releaseYear.year}}</h1>
+				<h2 class="text-secondary">{{movie.titleType.text}}</h2>
+				<h3>Rating :
+					{{rating.averageRating}}
+					-
+					{{rating.numVotes}}
+					votes</h3>
+				<h4>Views :
+					{{views}}</h4>
+			</div>
+		</div>
+		<div class="row mt-5">
+			<div class="col-2">
+				<a class="btn btn-primary" href="{{ path('movie_index')}}">Return to movies</a>
+			</div>
+			<div class="col-1">
+				<a class="btn btn-info" onclick="unavailable()">Watch</a>
+			</div>
+			{% if favorite == NULL %}
+				<div class="col-1">
+					<a class="btn btn-warning" href="{{ path('movie_favorite', {movieId: movie.id})}}">Favorite</a>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<script>
+		function unavailable() {
+alert("La fonctionnalité n'est pas disponible");
+}
+	</script>
+{% endblock %}

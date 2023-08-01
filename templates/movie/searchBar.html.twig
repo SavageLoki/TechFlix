@@ -1,0 +1,10 @@
+<div class=" row d-flex inline-flex align-items-baseline flex-row mt-2">
+	{{ form_start(form) }}
+	<div class="col-10 ms-2 align-self-center">
+		{{ form_label(form.movie, 'Search a movie') }}
+		{{ form_widget(form.movie) }}
+		<button type="submit" class='btn btn-primary mt-2'>Search</button>
+	</div>
+	{{ form_end(form) }}
+
+</div>

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Movies
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		{{ render(controller(
+        'App\\Controller\\MovieController::search'
+    )) }}
+		<div class="d-flex flex-wrap justify-content-center">
+			{% for movie in movieFound %}
+				<div class="card bg-secondary text-white m-3" style="width: 18rem;">
+					{% if movie.primaryImage != NULL %}
+						<img src="{{ movie.primaryImage.url }}" class="card-img-top w-100 h-50" alt="...">
+					{% else %}
+						<img src="{{ asset('img/no_image.png') }}" class="card-img-top" alt="...">
+					{% endif %}
+					<div class="card-body text-center">
+						<h5 class="card-title">{{ movie.titleText.text }}</h5>
+						<p class="card-text text-light">{{movie.releaseYear.year}}</p>
+						<p class="card-text text-secondary">{{movie.titleType.text}}</p>
+						<a href="{{ path('movie_view', {id: movie.id}) }}" class="btn btn-primary">Show Details</a>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	{% endblock %}
