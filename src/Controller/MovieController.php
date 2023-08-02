@@ -144,4 +144,12 @@ class MovieController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    /**
+     * @Route("/", name="root")
+     */
+    public function rootPage()
+    {
+        return $this->redirectToRoute('movie_index');
+    }
 }
